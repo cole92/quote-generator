@@ -11,8 +11,9 @@
         <!--LINK CUSTOM CSS FILE-->
         <link rel="stylesheet" href="style.css">
         <!--FONTAWESOME CDN-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" 
-        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <div class="container">
@@ -22,12 +23,24 @@
             <i class="fas fa-quote-right"></i>
             </h1>
             <p class="author" id="author"></p>
+            <a href=""><i id="heart" class="fa-regular fa-heart fa-beat"></i></a>
+            <a href=""><i id="fullHeart" class="fa-solid fa-heart fa-beat"></i></a>
             <hr/>
             <div class="buttons">
                 <a class="twitter" id="tweet" data-size="large" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                <button class="next" id="favBtn">Open favorites</button>
                 <button class="next" id="next2">Next quote</button>
             </div>
         </div>
+        <!--Modal Window-->
+        <div id="favoritesModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Favorite Quotes</h2>
+                <div id="favoriteQuotesList"></div>
+            </div>
+        </div>
+        
         
         <script type="module" src="js/main.js"></script>
     </body>
