@@ -94,6 +94,7 @@ hr {
 }
 #fullHeart {
  font-size: xx-large;
+ color: black;
 }
 /* Favorite btn */
 #favBtn {
@@ -142,3 +143,17 @@ hr {
     from {opacity: 0;}
     to {opacity: 1;}
 }
+/* Clear All Favorites dugme */
+.clear-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.clear-btn:hover {
+    background-color: darkred;
+}
+

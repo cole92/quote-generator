@@ -1,6 +1,6 @@
 import { fetchQuotes } from './api.js'
 import { displayQuote } from './interface.js';
-import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes } from './storage.js';
+import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes, isFavorite, clearAllFavorites} from './storage.js';
 
 export const initEventListeners = () => {
     const nextBtn = document.getElementById('next2');
@@ -26,9 +26,14 @@ export const initEventListeners = () => {
 
         displayQuote(quote, author);
         
-        // Reset srca
-        heartBtn.style.display = 'inline-block';
-        fullHeartBtn.style.display = 'none';
+        // Provera da li je citat dodat u 'omiljeno'
+        if (isFavorite(quote, author)) {
+            heartBtn.style.display = 'none';
+            fullHeartBtn.style.display = 'inline-block';
+        } else {
+            heartBtn.style.display = 'inline-block';
+            fullHeartBtn.style.display = 'none';
+        }
     };
 
     // Poziv asinhrone metode getNewQuote klikom na dugme
@@ -61,6 +66,13 @@ export const initEventListeners = () => {
         showFavoriteQuotes();
         document.getElementById('favoritesModal').style.display = 'block';
     })
+
+    const clearFavoritesBtn = document.getElementById('clearFavorites');
+    // Brisanje svih omiljenih
+    clearFavoritesBtn.addEventListener('click', () => {
+        clearAllFavorites();
+        showFavoriteQuotes();
+    });
     // Listener za zatvaranje modala
     const closeModalBtn = document.querySelector('.close');
     closeModalBtn.addEventListener('click', () => {
