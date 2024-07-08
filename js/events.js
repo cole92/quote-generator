@@ -1,6 +1,6 @@
 import { fetchQuotes } from './api.js'
 import { displayQuote } from './interface.js';
-import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes, isFavorite, clearAllFavorites} from './storage.js';
+import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes, isFavorite, clearAllFavorites } from './storage.js';
 
 export const initEventListeners = () => {
     const nextBtn = document.getElementById('next2');
@@ -16,8 +16,8 @@ export const initEventListeners = () => {
         let author = allQuotes[index].author;
 
         if (author) {
-            author = author.split(',')[0]; // Uzimam samo ime pre zareza
-            if (author.trim().toLowerCase() === "type.fit") {
+            author = author.replace(', type.fit', ''); // Uklanja ", type.fit" iz imena
+            if (author.trim().toLowerCase() === "type.fit" || author.trim() === "") {
                 author = "Anonymous";
             }
         } else {
@@ -25,9 +25,9 @@ export const initEventListeners = () => {
         }
 
         displayQuote(quote, author);
-        
+
         // Provera da li je citat dodat u 'omiljeno'
-        if (isFavorite(quote, author)) {
+        if (isFavorite(quote)) {
             heartBtn.style.display = 'none';
             fullHeartBtn.style.display = 'inline-block';
         } else {
@@ -39,7 +39,7 @@ export const initEventListeners = () => {
     // Poziv asinhrone metode getNewQuote klikom na dugme
     nextBtn.addEventListener('click', getNewQuote);
 
-    getNewQuote()
+    getNewQuote();
 
     // Logika za puno-prazno srce i cuvanje u localStorage
     heartBtn.addEventListener('click', (e) => {
@@ -47,42 +47,42 @@ export const initEventListeners = () => {
         heartBtn.style.display = 'none';
         fullHeartBtn.style.display = 'inline-block';
         const quote = document.getElementById('quote').innerText;
-        const author = document.getElementById('author').innerText;
-        saveFavoriteQuote(quote, author);
+        saveFavoriteQuote(quote);
     });
     fullHeartBtn.addEventListener('click', (e) => {
         e.preventDefault();
         heartBtn.style.display = 'inline-block';
         fullHeartBtn.style.display = 'none';
         const quote = document.getElementById('quote').innerText;
-        const author = document.getElementById('author').innerText;
-        removeFavoriteQuote(quote, author);
+        removeFavoriteQuote(quote);
     });
     favBtn.addEventListener('click', showFavoriteQuotes);
 };
-    // Listener za prikaz omiljenih citata
-    favBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        showFavoriteQuotes();
-        document.getElementById('favoritesModal').style.display = 'block';
-    })
 
-    const clearFavoritesBtn = document.getElementById('clearFavorites');
-    // Brisanje svih omiljenih
-    clearFavoritesBtn.addEventListener('click', () => {
-        clearAllFavorites();
-        showFavoriteQuotes();
-    });
-    // Listener za zatvaranje modala
-    const closeModalBtn = document.querySelector('.close');
-    closeModalBtn.addEventListener('click', () => {
+// Listener za prikaz omiljenih citata
+favBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    showFavoriteQuotes();
+    document.getElementById('favoritesModal').style.display = 'block';
+});
+
+const clearFavoritesBtn = document.getElementById('clearFavorites');
+// Brisanje svih omiljenih
+clearFavoritesBtn.addEventListener('click', () => {
+    clearAllFavorites();
+    showFavoriteQuotes();
+});
+
+// Listener za zatvaranje modala
+const closeModalBtn = document.querySelector('.close');
+closeModalBtn.addEventListener('click', () => {
     document.getElementById('favoritesModal').style.display = 'none';
 });
-    // Listener za zatvaranje modala klikom izvan sadrzaja
-    window.addEventListener('click', (event) => {
+
+// Listener za zatvaranje modala klikom izvan sadrzaja
+window.addEventListener('click', (event) => {
     const modal = document.getElementById('favoritesModal');
     if (event.target === modal) {
         modal.style.display = 'none';
     }
 });
-

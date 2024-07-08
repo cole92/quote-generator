@@ -1,24 +1,27 @@
 // Cuvanje novog citata u localStorage
-export const saveFavoriteQuote = (quote, author) => {
+export const saveFavoriteQuote = (quote) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    // Provera da li vec postoji u omiljenim
-    const alreadyFavorite = favorites.some(fav => fav.quote === quote && fav.author === author);
+    // Provera da li već postoji u omiljenim
+    const alreadyFavorite = favorites.some(fav => fav.quote === quote);
     if (!alreadyFavorite) {
-        favorites.push({ quote, author });
+        favorites.push({ quote });
         localStorage.setItem('favorites', JSON.stringify(favorites));
     }
 };
+
 // Uklanjanje omiljenog citata iz localStorage
-export const removeFavoriteQuote = (quote, author) => {
+export const removeFavoriteQuote = (quote) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    favorites = favorites.filter(fav => fav.quote !== quote || fav.author !== author);
+    favorites = favorites.filter(fav => fav.quote !== quote);
     localStorage.setItem('favorites', JSON.stringify(favorites));
 };
+
 // Provera da li je citat stavljen u 'omiljeno'
-export const isFavorite = (quote, author) => {
+export const isFavorite = (quote) => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    return favorites.some(fav => fav.quote === quote && fav.author === author);
+    return favorites.some(fav => fav.quote === quote);
 };
+
 // Prikazivanje omiljenih citata
 export const showFavoriteQuotes = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -28,10 +31,11 @@ export const showFavoriteQuotes = () => {
     favorites.forEach(fav => {
         const quoteDiv = document.createElement('div');
         quoteDiv.classList.add('favorite-quote');
-        quoteDiv.innerHTML = `<p>${fav.quote}</p><p>${fav.author}</p>`;
+        quoteDiv.innerHTML = `<p>${fav.quote}</p>`;
         favoriteQuoteList.appendChild(quoteDiv);
-    })
+    });
 };
+
 // Funkcija za brisanje svih omiljenih citata iz localStorage
 export const clearAllFavorites = () => {
     localStorage.removeItem('favorites');
