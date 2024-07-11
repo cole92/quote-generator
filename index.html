@@ -18,9 +18,9 @@
     <body>
         <div class="container">
             <h1>
-            <i class="fas fa-quote-left"></i>
-            <span class="quote" id="quote"></span>
-            <i class="fas fa-quote-right"></i>
+                <i class="fas fa-quote-left"></i>
+                <span class="quote" id="quote"></span>
+                <i class="fas fa-quote-right"></i>
             </h1>
             <p class="author" id="author"></p>
             <a href=""><i id="heart" class="fa-regular fa-heart fa-beat"></i></a>
@@ -37,11 +37,20 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Favorite Quotes</h2>
-                <div id="favoriteQuotesList"></div>
+                <!--Meni za sortiranje-->
+                <div class="sort-options">
+                    <label for="sortQuotes">Sort by:</label>
+                    <select id="sortQuotes">
+                        <option value="a-z">A - Z</option>
+                        <option value="z-a">Z - A</option>
+                    </select>
+                </div>
+                <div class="scrollable-content">
+                    <div id="favoriteQuotesList"></div>
+                </div>
                 <button id="clearFavorites" class="clear-btn">Clear All Favorites</button>
             </div>
         </div>
-        
         
         <script type="module" src="js/main.js"></script>
     </body>
