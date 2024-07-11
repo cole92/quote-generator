@@ -1,6 +1,6 @@
 import { fetchQuotes } from './api.js'
 import { displayQuote } from './interface.js';
-import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes, isFavorite, clearAllFavorites} from './storage.js';
+import { saveFavoriteQuote, removeFavoriteQuote, showFavoriteQuotes, isFavorite, clearAllFavorites, sortFavoriteQuotes} from './storage.js';
 
 export const initEventListeners = () => {
     const nextBtn = document.getElementById('next2');
@@ -96,3 +96,9 @@ export const initEventListeners = () => {
         fullHeartBtn.style.display = 'none';
     }
 };
+    // Padajuci meni
+    const sortSelect = document.getElementById('sortQuotes');
+    sortSelect.addEventListener('change', (e) => {
+        const sortOption = e.target.value;
+        sortFavoriteQuotes(sortOption)
+    });

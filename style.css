@@ -1,10 +1,10 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-  
-body{
+
+body {
     min-height: 100vh;
     transition: 0.5s;
     transition-timing-function: ease-in;
@@ -14,8 +14,7 @@ body{
     justify-content: center;
 }
 
-.container
-{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,33 +24,34 @@ body{
     width: 600px;
     background-color: rgba(255, 255, 255, 0.3);
     margin: 10px;
- 
 }
+
 .fa-quote-left, .fa-quote-right {
     font-size: 35px;
     color: rgb(0 138 179);
 }
-.quote
-{
+
+.quote {
     text-align: center;
     font-size: 40px;
     font-weight: bold;
 }
-.author 
-{
-    
-    margin:10px;
+
+.author {
+    margin: 10px;
     text-align: right;
     font-size: 25px;
     font-style: italic;
     font-family: cursive;
 }
+
 hr {
     margin: 10px 0;
     width: 100%;
     border: 1px solid black;
     background-color: black;
 }
+
 .buttons {
     width: 100%;
     display: flex;
@@ -59,20 +59,20 @@ hr {
     align-items: center;
     margin-top: 9px;
 }
-.twitter
-{
-    border:1px solid rgb(102, 179, 255);
+
+.twitter {
+    border: 1px solid rgb(102, 179, 255);
     border-radius: 4px;
     background-color: rgb(102, 179, 255);
     color: white;
     text-align: center;
     font-size: 1.8em;
-	width: 60px;
-	height: 35px;
-	line-height: 40px;
+    width: 60px;
+    height: 35px;
+    line-height: 40px;
 }
-.next
-{
+
+.next {
     font-size: 18px;
     border-radius: 5px;
     cursor: pointer;
@@ -82,24 +82,26 @@ hr {
     color: white;
     background-image: linear-gradient(to right bottom, rgb(0 145 230), #32c418a8);
 }
-.container:hover
-{
+
+.container:hover {
     box-shadow: 0 10px 10px rgb(230, 0, 0);
 }
 
 /* Like btn  */
-#heart {
+#heart, #fullHeart {
     font-size: xx-large;
     color: black;
 }
+
 #fullHeart {
- font-size: xx-large;
- color: black;
+    display: none;
 }
+
 /* Favorite btn */
 #favBtn {
     margin-left: 10%;
 }
+
 /* Modal window */
 .modal {
     display: none;
@@ -110,19 +112,23 @@ hr {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
+    background-color: #fff;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
     max-width: 600px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     animation: fadeIn 0.4s;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .close {
@@ -132,8 +138,7 @@ hr {
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover, .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -143,6 +148,7 @@ hr {
     from {opacity: 0;}
     to {opacity: 1;}
 }
+
 /* Clear All Favorites dugme */
 .clear-btn {
     background-color: red;
@@ -152,8 +158,82 @@ hr {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
+    transition: background-color 0.3s;
 }
+
 .clear-btn:hover {
     background-color: darkred;
 }
 
+/* Sort options */
+.sort-options {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-options label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.sort-options select {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Stilizacija citata u omiljenim */
+.favorite-quote {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.favorite-quote p {
+    margin: 5px 0;
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+}
+
+.favorite-quote p.author {
+    font-style: italic;
+    color: #555;
+    text-align: right;
+}
+/* Scrollable content */
+.scrollable-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.favorite-quote {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 145, 230, 0.1);
+    border-left: 5px solid rgba(0, 145, 230, 0.8);
+    border-radius: 5px;
+}

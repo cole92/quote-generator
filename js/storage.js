@@ -36,3 +36,15 @@ export const showFavoriteQuotes = () => {
 export const clearAllFavorites = () => {
     localStorage.removeItem('favorites');
 };
+// Sortiranje omiljnih citata
+export const sortFavoriteQuotes = (sortOption) => {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (sortOption === 'a-z') {
+        favorites.sort((a, b) => a.quote.localeCompare(b.quote));
+    } else if (sortOption === 'z-a') {
+        favorites.sort((a, b) => b.quote.localeCompare(a.quote));
+    }
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    showFavoriteQuotes()
+}
