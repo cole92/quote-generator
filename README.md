@@ -1,59 +1,62 @@
-# Random Quote Generator
+# Random Quote Generator (Vanilla JavaScript)
 
-## Opis
-Random Quote Generator je jednostavna aplikacija koja generise nasumicne citate pomocu javnog API-ja i omogucava korisnicima da sacuvaju omiljene citate. Korisnici mogu pregledati, dodavati i uklanjati citate iz liste omiljenih, kao i deliti citate na Twitter-u.
+A small web app that generates random quotes and lets you save your favorites. Favorites are stored in **LocalStorage**, and you can sort or clear them anytime.
 
-## Funkcionalnosti
-- Generisanje nasumicnih citata sa API-ja.
-- Prikazivanje citata i autora.
-- Obelezavanje omiljenih citata pomocu srca.
-- Pregledavanje sacuvanih omiljenih citata u modalnom prozoru.
-- Uklanjanje citata iz omiljenih.
-- Brisanje svih omiljenih citata odjednom.
-- Deljenje citata na Twitter-u.
+## Features
 
-## Tehnologije
-- HTML
-- CSS
-- JavaScript
-- FontAwesome za ikone
-- Lokalno skladiste (Local Storage) za cuvanje omiljenih citata
+- Generate a random quote (text + author)
+- Mark/unmark quotes as favorites (heart toggle)
+- Favorites modal (view saved quotes)
+- Sort favorites (A–Z / Z–A)
+- Clear all favorites
+- Share a quote via X (Twitter intent link)
+- Persistent favorites via LocalStorage
 
-## Izmene i Resavanje Problema
-### Opis Problema
-Prethodno je aplikacija imala problem sa prepoznavanjem i prikazivanjem omiljenih citata zbog razlicitih formata autora citata. Konkretno, API je vracao autore u formatu "Ime, type.fit", sto je uzrokovalo neuspesne provere pri dodavanju ili uklanjanju omiljenih citata.
+## Tech stack
 
-### Resenje
-Problem je resen izmenom logike za proveru omiljenih citata tako da se proverava samo tekst citata (`quote`), a ne i autor. Ova promena je omogucila ispravno prepoznavanje i prikazivanje omiljenih citata.
+- HTML / CSS
+- JavaScript (ES modules)
+- Fetch API
+- LocalStorage
+- Font Awesome (icons)
 
-#### Koraci Izmene:
-1. **Provera citata bez autora**: Izmenjena je logika tako da se provera omiljenih citata vrsi samo na osnovu citata (`quote`), bez obzira na autora.
-2. **Uklanjanje provere autora**: Uklonjena je provera autora iz funkcija `saveFavoriteQuote`, `removeFavoriteQuote`, i `isFavorite` u `storage.js`.
-3. **Provera omiljenih citata**: Funkcija `isFavorite` sada proverava da li je citat omiljen samo na osnovu `quote`.
-4. **Prikaz srca**: Prikazivanje praznog ili punog srca sada zavisi samo od citata, sto je omogucilo ispravno prikazivanje stanja srca.
+## Data source (CORS-safe)
 
-#### Primer koda:
-```javascript
-// Cuvanje novog citata u localStorage
-export const saveFavoriteQuote = (quote) => {
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    // Provera da li vec postoji u omiljenim
-    const alreadyFavorite = favorites.some(fav => fav.quote === quote);
-    if (!alreadyFavorite) {
-        favorites.push({ quote });
-        localStorage.setItem('favorites', JSON.stringify(favorites));
-    }
-};
+The original public quotes endpoint is blocked by CORS in browsers, so the app loads quotes from a local JSON file:
 
-// Uklanjanje omiljenog citata iz localStorage
-export const removeFavoriteQuote = (quote) => {
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    favorites = favorites.filter(fav => fav.quote !== quote);
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-};
+- `data/quotes.json`
 
-// Provera da li je citat stavljen u 'omiljeno'
-export const isFavorite = (quote) => {
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    return favorites.some(fav => fav.quote === quote);
-};
+## Run locally
+
+Recommended (local server):
+
+```bash
+python3 -m http.server 5173
+```
+
+Open:
+
+- http://localhost:5173
+
+## Project structure (high level)
+
+```txt
+.
+├── index.html
+├── css/
+├── js/
+│   ├── api.js
+│   ├── events.js
+│   ├── interface.js
+│   └── storage.js
+└── data/
+    └── quotes.json
+```
+
+## Status
+
+This is a learning project and may be archived (not actively maintained).
+
+## License
+
+Educational / personal use.

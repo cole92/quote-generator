@@ -1,6 +1,6 @@
 // api.js
 export const fetchQuotes = async () => {
-    let apiUrl = 'https://type.fit/api/quotes';
+    const apiUrl = "./data/quotes.json"; 
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
